@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { contactsSlice } from 'redux/contactsSlice';
 import { getFilter, getContacts } from 'redux/selectors';
