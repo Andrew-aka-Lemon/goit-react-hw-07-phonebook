@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { contactsSlice } from 'redux/contactsSlice';
 
 import { getFilter, getContacts } from 'redux/selectors';
-import { getAllContacts } from 'services/ContactsAPI';
+import { deleteContactById, getAllContacts } from 'services/ContactsAPI';
 
 import { Lishka, NotUglyBtn } from './ListOfContacts.styled';
 
@@ -12,13 +11,13 @@ const ListOfContacts = () => {
   const filter = useSelector(getFilter);
   const contacts = useSelector(getContacts);
 
-  const contactDeleter = id => {
-    // dispatch(removeContact(id));
-  };
-
   useEffect(() => {
     dispatch(getAllContacts());
   }, [dispatch]);
+
+  const contactDeleter = id => {
+    dispatch(deleteContactById(id));
+  };
 
   const listToRender = contacts.filter(contact => {
     return contact.name.toLowerCase().includes(filter);
