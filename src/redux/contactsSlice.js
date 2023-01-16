@@ -30,9 +30,10 @@ export const contactsSlice = createSlice({
     [addContact.pending](state) {
       state.isLoading = true;
     },
-    [addContact.fulfilled](state) {
+    [addContact.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
+      state.items.push(action.payload);
     },
     [addContact.rejected](state, action) {
       state.isLoading = false;
@@ -41,9 +42,10 @@ export const contactsSlice = createSlice({
     [deleteContactById.pending](state) {
       state.isLoading = true;
     },
-    [deleteContactById.fulfilled](state) {
+    [deleteContactById.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
+      state.items = state.items.filter(item => item.id !== action.payload);
     },
     [deleteContactById.rejected](state, action) {
       state.isLoading = false;
